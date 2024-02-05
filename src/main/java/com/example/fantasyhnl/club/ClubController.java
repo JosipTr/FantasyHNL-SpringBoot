@@ -5,16 +5,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ClubController {
-	private final ClubRepository repository;
-
-	public ClubController(ClubRepository repository) {
-		super();
-		this.repository = repository;
-	}
+	private final ClubService clubService;
 	
+	public ClubController(ClubService clubService) {
+		super();
+		this.clubService = clubService;
+	}
+
 	@GetMapping("/")
 	public void getClubs() {
-		repository.getClubs();
+		clubService.getClubs();
 		return;
 	}
 }
