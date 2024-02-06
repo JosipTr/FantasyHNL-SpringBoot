@@ -1,5 +1,7 @@
 package com.example.fantasyhnl.club;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,8 +15,8 @@ public class ClubController {
 	}
 
 	@GetMapping("/")
-	public void getClubs() {
-		clubService.getClubs();
-		return;
+	public ResponseEntity<Object> getClubs() {
+		var clubs = clubService.getClubs();
+		return new ResponseEntity<Object>(clubs, HttpStatus.OK);
 	}
 }
