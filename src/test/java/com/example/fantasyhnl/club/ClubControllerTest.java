@@ -2,20 +2,37 @@ package com.example.fantasyhnl.club;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-@WebMvcTest(controllers = ClubController.class)
-@AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(MockitoExtension.class)
 class ClubControllerTest {
-
-	@Test
-	void test() {
-		fail("Not yet implemented");
+	
+	@Mock
+	private ClubService clubService;
+	private ClubController controller;
+	
+	@BeforeEach
+	public void setUp() {
+		controller = new ClubController(clubService);
 	}
 
+	@Test
+	void getClubs() {
+		var response = controller.getClubs();
+		assertEquals(ResponseEntity.class, response.getClass());
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
+	
+	@Test
+	void getClubById() {
+		var response =  controller.getClub(561);
+		assertEquals(ResponseEntity.class, response.getClass());
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
 }
