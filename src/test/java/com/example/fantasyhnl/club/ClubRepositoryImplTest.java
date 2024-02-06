@@ -1,6 +1,7 @@
 package com.example.fantasyhnl.club;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
@@ -21,5 +22,14 @@ class ClubRepositoryImplTest {
 		List<Club> clubs = clubRepository.getClubs();
 		assertThat(clubs).hasOnlyElementsOfType(Club.class);
 		assertThat(clubs).isNotEmpty();
+	}
+	
+	@Test
+	@DisplayName("Should return club")
+	void checkIfReturnsClubEntity() {
+		var club = clubRepository.getClubById(561);
+		assertThat(club).hasFieldOrPropertyWithValue("id", 561);
+		assertEquals(Club.class, club.getClass());
+		
 	}
 }

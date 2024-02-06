@@ -13,6 +13,12 @@ public class ClubServiceImpl implements ClubService{
 		super();
 		this.clubRepository = clubRepository;
 	}
+	
+	@Override
+	public ClubDto getClubById(int id) {
+		var club = clubRepository.getClubById(id);
+		return club.toClubDto();
+	}
 
 	@Override
 	public List<ClubDto> getClubs() {
