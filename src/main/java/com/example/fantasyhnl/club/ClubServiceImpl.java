@@ -15,9 +15,10 @@ public class ClubServiceImpl implements ClubService{
 	}
 
 	@Override
-	public List<Club> getClubs() {
-		
-		return clubRepository.getClubs();
+	public List<ClubDto> getClubs() {
+		List<Club> clubs = clubRepository.getClubs();
+		List<ClubDto> clubsDto = clubs.stream().map(club -> club.toClubDto()).toList();
+		return clubsDto;
 	}
 
 }

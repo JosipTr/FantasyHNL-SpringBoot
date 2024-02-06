@@ -21,6 +21,10 @@ public class Club {
 		this.national = national;
 		this.logo = logo;
 	}
+	
+	public ClubDto toClubDto() {
+		return new ClubDto(id, name, code, country, founded, national, logo);
+	}
 
 	public int getId() {
 		return id;
