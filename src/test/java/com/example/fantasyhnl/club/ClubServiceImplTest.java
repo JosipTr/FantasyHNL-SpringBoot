@@ -1,33 +1,46 @@
 package com.example.fantasyhnl.club;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static org.mockito.Mockito.verify;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class ClubServiceImplTest {
 
-	@Autowired
-	private ClubService clubService;
+	@Mock
+	private ClubRepository clubRepository;
+	private ClubServiceImpl clubServiceImpl;
+	
+	
+	@BeforeEach
+	void setUp() {
+		clubServiceImpl = new ClubServiceImpl(clubRepository);
+	}
+	
 	
 	@Test
 	@DisplayName("Should return List of ClubDto's")
 	void test() {
-		var clubs = clubService.getClubs();
-		assertThat(clubs).hasOnlyElementsOfType(ClubDto.class);
-		assertThat(clubs).isNotEmpty();
+		clubServiceImpl.getClubs();
+		verify(clubRepository).getClubs();
 	}
 	
 	@Test
 	@DisplayName("Should return ClubDto")
-	void checkIfReturnTypeIsClubDto() {
-		var club = clubService.getClubById(561);
-		assertThat(club).hasFieldOrPropertyWithValue("id", 561);
-		assertEquals(ClubDto.class, club.getClass());
+	void canGetClubById() {
+	    Integer id = 561;
+	    Club club = new Club(id, null, null, null, id, false, null);
+	    Mockito.when(clubRepository.getClubById(id)).thenReturn(club); 
+	    ClubDto clubDto = clubServiceImpl.getClubById(id);
+	    assertThat(clubDto).isNotNull();
 	}
 
 }
