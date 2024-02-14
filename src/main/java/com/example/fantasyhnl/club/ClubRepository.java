@@ -1,8 +1,8 @@
-package com.example.fantasyhnl.club;
-
-import java.util.List;
-
-public interface ClubRepository {
-	Club getClubById(int id);
-	List<Club> getClubs();
-}
+//package com.example.fantasyhnl.club;
+//
+//import org.springframework.data.jpa.repository.JpaRepository;
+//import org.springframework.stereotype.Repository;
+//
+//@Repository
+//public interface ClubRepository extends JpaRepository<Club, Integer>{
+//}
