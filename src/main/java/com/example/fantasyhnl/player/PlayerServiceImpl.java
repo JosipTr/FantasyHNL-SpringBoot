@@ -11,16 +11,15 @@ import lombok.AllArgsConstructor;
 public class PlayerServiceImpl implements PlayerService{
 	private final PlayerRepository repository;
 	
-//	public List<PlayerDto> getAllPlayers() {
-//		var players = repository.findAll();
-////		var playerDtos = players.stream().map(Player::toPlayerDto).toList();
-//		return playerDtos;
-//	}
+	public List<PlayerDto> getAllPlayers() {
+		var players = repository.findAll();
+		var playerDtos = players.stream().map(Player::toPlayerDto).toList();
+		return playerDtos;
+	}
 
 	@Override
-	public Player getPlayerById(int id) {
+	public PlayerDto getPlayerById(int id) {
 		var player = repository.getReferenceById(id);
-		return player;
-//		return player.toPlayerDto();
+		return player.toPlayerDto();
 	}
 }

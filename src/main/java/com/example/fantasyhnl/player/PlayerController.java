@@ -12,11 +12,11 @@ import lombok.AllArgsConstructor;
 public class PlayerController {
 	private final PlayerService service;
 	
-//	@GetMapping("/api/players")
-//	public ResponseEntity<Object> getAllPlayers() {
-//		var players = service.getAllPlayers();
-//		return new ResponseEntity<Object>(players, HttpStatus.OK);
-//	}
+	@GetMapping("/api/players")
+	public ResponseEntity<Object> getAllPlayers() {
+		var players = service.getAllPlayers();
+		return new ResponseEntity<Object>(players, HttpStatus.OK);
+	}
 	
 	@GetMapping("/api/player")
 	public ResponseEntity<Object> getPlayerById() {

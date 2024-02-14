@@ -1,8 +1,6 @@
 package com.example.fantasyhnl.player;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.example.fantasyhnl.player.birth.Birth;
 import com.example.fantasyhnl.statistic.Statistic;
@@ -34,9 +32,9 @@ public class Player {
 	@ManyToOne
 	private Team team;
 	@OneToMany(mappedBy = "player", cascade = CascadeType.PERSIST)
-	private Set<Statistic> statistics = new HashSet<Statistic>();
+	private List<Statistic> statistics;
 	
-//	public PlayerDto toPlayerDto() {
-//		return new PlayerDto(id, name, age, number, position, firstname, lastname, nationality, height, weight, injured, photo, birth, team, statistics);
-//	}
+	public PlayerDto toPlayerDto() {
+		return new PlayerDto(id, name, age, number, position, firstname, lastname, nationality, height, weight, injured, photo, birth, team, statistics);
+	}
 }
