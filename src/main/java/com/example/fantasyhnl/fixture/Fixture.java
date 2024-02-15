@@ -2,7 +2,6 @@ package com.example.fantasyhnl.fixture;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.example.fantasyhnl.statistic.Statistic;
 import com.example.fantasyhnl.venue.Venue;
