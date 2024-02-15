@@ -1,7 +1,9 @@
 package com.example.fantasyhnl.player;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -24,5 +26,12 @@ public class PlayerServiceImpl implements PlayerService{
 		var player = repository.getReferenceById(id);
 		System.out.println(player);
 		return player.toPlayerDto();
+	}
+
+	@Override
+	public List<PlayerDto> getPlayersFromTeam(int id) {
+		var players = repository.getAllPlayersFromTeam(id);
+		var playersDto = players.stream().map(Player::toPlayerDto).toList();
+		return playersDto;
 	}
 }

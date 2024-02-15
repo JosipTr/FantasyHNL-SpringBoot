@@ -1,7 +1,7 @@
 package com.example.fantasyhnl.fixture;
 
 import java.util.HashSet;
-
+import java.util.List;
 import java.util.Set;
 
 import com.example.fantasyhnl.statistic.Statistic;
@@ -36,5 +36,6 @@ public class Fixture {
 	private Score score;
 	@OneToMany(mappedBy = "fixture")
 	@JsonIgnore
-	private Set<Statistic> statistic = new HashSet<>();
+	@OrderBy(value = "id")
+	private List<Statistic> statistics;
 	}
