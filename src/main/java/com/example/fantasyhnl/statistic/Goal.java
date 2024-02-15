@@ -1,27 +1,34 @@
 package com.example.fantasyhnl.statistic;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.EmbeddedId;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
 @Table(name = "goals")
 public class Goal {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int id;
+	@EmbeddedId
+	@JsonIgnore
+	private StatisticId id;
 	private Integer total;
 	private Integer conceded;
 	private Integer assists;
-	private Integer saves;	
+	private Integer saves;
+	@OneToOne
+	@MapsId
+	@JsonIgnore
+	private Statistic statistic;
+	
+	@Override
+	public String toString() {
+		return "Goal [id=" + id + ", total=" + total + ", conceded=" + conceded + ", assists=" + assists + ", saves="
+				+ saves + "]";
+	}	
+	
 }

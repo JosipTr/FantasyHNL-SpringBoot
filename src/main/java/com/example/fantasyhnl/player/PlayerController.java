@@ -20,7 +20,7 @@ public class PlayerController {
 	
 	@GetMapping("/api/player")
 	public ResponseEntity<Object> getPlayerById() {
-		var players = service.getPlayerById(14494);
-		return new ResponseEntity<Object>(players, HttpStatus.OK);
+		var player = service.getPlayerById(14494);
+		return new ResponseEntity<Object>(player, HttpStatus.OK);
 	}
 }

@@ -1,20 +1,29 @@
 package com.example.fantasyhnl.fixture;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
+import lombok.*;
 
 @Entity
 @Getter
-@Setter 
-@ToString
+@Setter
 @EqualsAndHashCode
 public class PenaltyTime {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@JsonIgnore
 	private int id;
 	private Integer home;
 	private Integer away;
+	@OneToOne
+	@MapsId
+	@JsonIgnore
+	private Score score;
+
+	@Override
+	public String toString() {
+		return "PenaltyTime [id=" + id + ", home=" + home + ", away=" + away + "]";
+	}
+
 }

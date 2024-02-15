@@ -1,5 +1,7 @@
 package com.example.fantasyhnl.fixture;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,12 +9,21 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
 @Table(name = "full_times")
 public class FullTime {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@JsonIgnore
 	private int id;
 	private Integer home;
 	private Integer away;
+	@OneToOne
+	@MapsId
+	@JsonIgnore
+	private Score score;
+	@Override
+	public String toString() {
+		return "FullTime [id=" + id + ", home=" + home + ", away=" + away + "]";
+	}
+	
+	
 }

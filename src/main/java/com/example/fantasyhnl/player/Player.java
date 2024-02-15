@@ -1,10 +1,13 @@
 package com.example.fantasyhnl.player;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.example.fantasyhnl.player.birth.Birth;
 import com.example.fantasyhnl.statistic.Statistic;
 import com.example.fantasyhnl.team.Team;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,12 +30,13 @@ public class Player {
 	private String weight;
 	private Boolean injured;
 	private String photo;
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	private Birth birth;
 	@ManyToOne
 	private Team team;
-	@OneToMany(mappedBy = "player", cascade = CascadeType.PERSIST)
-	private List<Statistic> statistics;
+	@OneToMany(mappedBy = "player")
+	@JsonIgnore
+	private Set<Statistic> statistics = new HashSet<Statistic>();
 	
 	public PlayerDto toPlayerDto() {
 		return new PlayerDto(id, name, age, number, position, firstname, lastname, nationality, height, weight, injured, photo, birth, team, statistics);

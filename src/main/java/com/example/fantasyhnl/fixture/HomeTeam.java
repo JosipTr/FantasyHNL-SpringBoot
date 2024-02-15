@@ -1,25 +1,30 @@
 package com.example.fantasyhnl.fixture;
 
 import com.example.fantasyhnl.team.Team;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
 public class HomeTeam {
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@JsonIgnore
 	private int home_id;
 	private Boolean winner;
 	@ManyToOne
 	@JoinColumn(name = "team_id")
 	private Team team;
+	@OneToOne
+	@MapsId
+	@JsonIgnore
+	private Fixture fixture;
+	@Override
+	public String toString() {
+		return "HomeTeam [home_id=" + home_id + ", winner=" + winner + ", team=" + team + "]";
+	}
+	
 }

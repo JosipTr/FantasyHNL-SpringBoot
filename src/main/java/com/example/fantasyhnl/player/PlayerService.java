@@ -1,8 +1,8 @@
 package com.example.fantasyhnl.player;
 
-import java.util.List;
+import java.util.Set;
 
 public interface PlayerService {
-	List<PlayerDto> getAllPlayers();
+	Set<PlayerDto> getAllPlayers();
 	PlayerDto getPlayerById(int id);
 }

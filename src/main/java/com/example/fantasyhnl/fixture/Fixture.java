@@ -6,18 +6,19 @@ import java.util.Set;
 
 import com.example.fantasyhnl.statistic.Statistic;
 import com.example.fantasyhnl.venue.Venue;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Getter
-@Setter
-@EqualsAndHashCode
 @ToString
+@Setter
 @Table(name = "fixtures")
 public class Fixture {
 	@Id
+	@JsonIgnore
 	private int id;
 	private String referee;
 	private String timezone;
@@ -25,14 +26,15 @@ public class Fixture {
 	private Integer timestamp;
 	@ManyToOne
 	private Venue venue;
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(mappedBy = "fixture")
 	private GameStatus status;
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(mappedBy = "fixture")
 	private HomeTeam homeTeam;
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(mappedBy = "fixture")
 	private AwayTeam awayTeam;
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(mappedBy = "fixture")
 	private Score score;
-	@OneToMany(mappedBy = "fixture", cascade = {CascadeType.PERSIST})
+	@OneToMany(mappedBy = "fixture")
+	@JsonIgnore
 	private Set<Statistic> statistic = new HashSet<>();
 	}

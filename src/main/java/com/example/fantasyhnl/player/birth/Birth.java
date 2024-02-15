@@ -13,7 +13,6 @@ import lombok.*;
 @Table(name = "births")
 public class Birth {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	private String date;
 	private String place;
